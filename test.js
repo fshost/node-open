@@ -3,6 +3,8 @@ var exec = require('child_process').exec
   ;
 
 
+
+
 /**
  * open a file or uri using the default application for the file type.
  *
@@ -12,7 +14,6 @@ var exec = require('child_process').exec
  *      an error object that contains a property 'code' with the exit
  *      code of the process.
  */
-
 module.exports = function open(target, callback) {
   var command,
     url = target.replace(/"/, '\\\"');
@@ -27,5 +28,12 @@ module.exports = function open(target, callback) {
     // use Portlands xdg-open everywhere else
     command = path.join(__dirname, '../vendor/xdg-open') + ' "' + url + '"';
   }
+  console.log('command:',command)
   return exec(command, callback);
 }
+
+module.exports('https://www.github.com/fshost', function (err) {
+  console.log(arguments);
+    if (err) throw err;
+    console.log('success');
+});
